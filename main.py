@@ -25,3 +25,8 @@ twit_config = config['twitter']
 auth = tweepy.OAuthHandler(twit_config['api_key'], twit_config['api_key_secret'])
 auth.set_access_token(twit_config['access_token'], twit_config['access_token_secret'])
 twitapi = tweepy.API(auth, wait_on_rate_limit=True)
+
+# extract Tweets from Malaysian MOH about Malaysian COVID-19 case data
+# write to pandas database
+tweet_collection = twitapi.search("KKMPutrajaya")
+print(tweet_collection.__len__)
