@@ -1,6 +1,10 @@
 import pandas as pd
 import mysql.connector as msc
 import json
+import tweepy
+import csv
+import re
+import string
 
 # read config file into JSON object
 configFile = open('config.json')
@@ -16,4 +20,8 @@ connection = msc.connect(
     database=db_config['database']
 )
 
-print(connection);
+# authorize Twitter app with Tweepy OAuthHandler
+twit_config = config['twitter']
+auth = tweepy.OAuthHandler(twit_config['api_key'], twit_config['api_key_secret'])
+auth.set_access_token(twit_config['access_token'], twit_config['access_token_secret'])
+twitapi = tweepy.API(auth, wait_on_rate_limit=True)
