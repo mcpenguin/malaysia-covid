@@ -17,7 +17,10 @@ scrape the HTML content from each day's blog page.
 - Migrate data to Google Cloud database
 - Create task scheduler on laptop to automatically fetch data every day (the
 top task makes this step much easier)
-- Create a dashboard using Django (or another Python web development tool)
+- Create a dashboard using Django (or another Python web development tool) to visualize
+the data
+- Use the GitHub API to automatically append to the CSV in the repository 
+every week
 
 ## Notes
 - If you see the ```testing.ipynb``` document, which I used to as a testing
