@@ -1,6 +1,5 @@
 import datetime
 import requests
-import string
 from bs4 import BeautifulSoup
 
 # Malay month list

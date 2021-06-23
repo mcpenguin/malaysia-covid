@@ -2,4 +2,6 @@ config.json
 links.txt
 extract_data.py
 test.py
-__pycache__
+store_covid_data_on_gcloud.bat
+store_to_gcloud.spec
+.vscode
