@@ -1,5 +1,6 @@
 import datetime
 import requests
+import string
 from bs4 import BeautifulSoup
 
 # Malay month list
@@ -76,13 +77,16 @@ def get_data(date):
                 lambda tag: tag.name == "li" and vtt_map[var] in tag.text))
             # Get the soup for the specific string
             soup_var = BeautifulSoup(keyword_string, 'html.parser')
-            # use the custom soup to extract the case data, which is stored into the day_data object
-            content = soup_var.find(
-                lambda tag: tag.name == "strong").contents[0]
-            # parse the content to only extract the integer value for the corresponding variable
+            # use the custom soup to extract the case data, which is stored in strong tags
+            strongs = list(soup_var.findAll(
+                lambda tag: tag.name == "strong"))
+            # sometimes, there may be *two* strong tags together, so we
+            # have to join the contents of the strong tags to get the final value
+            content = "".join(j for i in map(lambda s: s.contents, strongs) for j in i)
+            # parse the content to only extract the integer part for the corresponding variable
             for s in ["\xa0", "kes", "kluster", " ", ",", ";"]:
                 content = content.replace(s, "")
-            # convert value to int
+            # convert the integer part to an int
             day_data[var] = int(content)
 
         # return result when done
