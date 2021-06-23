@@ -1,10 +1,10 @@
 import pandas as pd
 import mysql.connector as msc
+import datetime
+from dateutil.rrule import rrule, DAILY
 import json
-import tweepy
-import csv
-import re
-import string
+
+from fetch_data import get_data
 
 # read config file into JSON object
 configFile = open('config.json')
@@ -20,13 +20,23 @@ connection = msc.connect(
     database=db_config['database']
 )
 
-# authorize Twitter app with Tweepy OAuthHandler
-twit_config = config['twitter']
-auth = tweepy.OAuthHandler(twit_config['api_key'], twit_config['api_key_secret'])
-auth.set_access_token(twit_config['access_token'], twit_config['access_token_secret'])
-twitapi = tweepy.API(auth, wait_on_rate_limit=True)
+# fetch all data from Jan 20 to now
+def fetch_all_data():
+    # insert data from Jan onwards into dataset
+    dataset = []
+    start_date = datetime.date(2021, 1, 20)
+    end_date = datetime.date.today()
 
-# extract Tweets from Malaysian MOH about Malaysian COVID-19 case data
-# write to pandas database
-tweet_collection = twitapi.search("KKMPutrajaya")
-print(tweet_collection.__len__)
+    for dt in rrule(DAILY, dtstart=start_date, until=end_date):
+        try:
+            dataset.append(get_data(dt))
+            print("Data retrieved for the date {}".format(dt.strftime("%d/%m/%Y")))
+        except:
+            print("Unable to retrieve data for the date {}".format(dt.strftime("%d/%m/%Y")))
+
+    return dataset
+
+# fetch all data and store in dataframe
+df = pd.DataFrame(fetch_all_data())
+# put dataframe to csv
+df.to_csv("covid_data.csv")
