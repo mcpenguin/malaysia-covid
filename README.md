@@ -22,3 +22,5 @@ exponentially harder to parse the data into case data without doing it manually.
 In the future, it might be possible to utilize NLP algorithms to parse the data.
 - In the current dataset, some dates are missing, as their pages did not "fit" the
 template used in the website. For these dates, the data must be inputted manually.
+- There are also some anomalies in the dataset, which must be corrected manually
+for similar reasons to the above.
