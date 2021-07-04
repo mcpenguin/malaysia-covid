@@ -45,6 +45,10 @@ def makeURL(date):
         convertDate(date)
     )
 
+# print anamolous urls for manual input
+for url in map(lambda strdate: makeURL(datetime.datetime.strptime(strdate, '%d/%m/%Y')), ['28/01/2021', '16/02/2021', '20/02/2021', '31/03/2021', '11/04/2021', '30/06/2021']):
+    print(url)
+
 # function to get data from website by date
 def get_data(date):
     # make url to website for date

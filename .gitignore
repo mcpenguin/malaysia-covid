@@ -3,5 +3,6 @@ links.txt
 extract_data.py
 test.py
 store_covid_data_on_gcloud.bat
-store_to_gcloud.spec
 .vscode
+vaccination_data.txt
+store_to_gcloud.py
