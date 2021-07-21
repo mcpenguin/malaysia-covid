@@ -6,3 +6,14 @@ store_covid_data_on_gcloud.bat
 .vscode
 vaccination_data.txt
 store_to_gcloud.py
+fetch_area_data.py
+
+local_db_config.json
+
+maps
+testing/testing_map.ipynb
+testing/testing_map.ipynb
+testing/testing.ipynb
+testing/testing2.ipynb
+.idea
+__pycache__
