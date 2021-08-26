@@ -1,8 +1,5 @@
-import mysql.connector as msc
-import json
 import pandas as pd
 import numpy as np
-import datetime
 import datetime
 import requests
 from bs4 import BeautifulSoup
@@ -114,20 +111,6 @@ def get_data(date):
         print("{} returned {} error".format(url, response.status_code))
         return {}
 
-# make connection to the GCloud database
-# connection = msc.connect(
-#     host=db_config['host'], 
-#     port=db_config['port'],
-#     user=db_config['user'],
-#     password=db_config['password'],
-#     auth_plugin='mysql_native_password',
-#     database=db_config['database']
-# )
-# cursor = connection.cursor()
-
-# import csv data into database
-# df = pd.read_csv("covid_data.csv")
-# store data from today into database
 data = get_data(datetime.date.today())
 # input data into database
 client['msiacovid']['malaysia_covid_daily_cases'].insert_one(data)
