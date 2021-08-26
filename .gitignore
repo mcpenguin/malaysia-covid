@@ -5,7 +5,6 @@ test.py
 store_covid_data_on_gcloud.bat
 .vscode
 vaccination_data.txt
-fetch_area_data.py
 
 local_db_config.json
 .env
